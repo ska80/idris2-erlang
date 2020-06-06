@@ -18,7 +18,7 @@ import Data.List.Extra
 import Data.Maybe
 import Data.Stream
 import Data.Strings
-import System.File
+import Erlang.System.File
 
 %default covering
 

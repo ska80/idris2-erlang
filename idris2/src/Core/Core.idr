@@ -7,9 +7,9 @@ import Data.List
 import Data.Vect
 import Parser.Source
 
-import public Data.IORef
-import System
-import System.File
+import public Erlang.Data.IORef
+import Erlang.System
+import Erlang.System.File
 
 %default covering
 

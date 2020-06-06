@@ -54,8 +54,8 @@ import Data.NameMap
 import Data.Stream
 import Data.Strings
 
-import System
-import System.File
+import Erlang.System
+import Erlang.System.File
 
 %default covering
 

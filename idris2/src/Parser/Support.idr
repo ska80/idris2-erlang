@@ -7,7 +7,7 @@ import Core.TT
 import Data.List
 import Data.List.Views
 import Parser.Unlit
-import System.File
+import Erlang.System.File
 
 %default total
 

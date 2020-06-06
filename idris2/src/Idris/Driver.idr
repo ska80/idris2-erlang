@@ -22,9 +22,9 @@ import IdrisPaths
 import Data.List
 import Data.So
 import Data.Strings
-import System
-import System.Directory
-import System.File
+import Erlang.System
+import Erlang.System.Directory
+import Erlang.System.File
 import Utils.Path
 
 import Yaffle.Main

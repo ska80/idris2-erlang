@@ -21,16 +21,16 @@ import Core.Name
 import Core.Options
 import Core.TT
 
-import Data.IOArray
+import Erlang.Data.IOArray
 import Data.Maybe
 import Data.NameMap
 import Data.List
 import Data.Strings
 import Utils.Binary
 import Utils.Path
-import System
+import Erlang.System
 import System.Info
-import System.File
+import Erlang.System.File
 
 %default covering
 
