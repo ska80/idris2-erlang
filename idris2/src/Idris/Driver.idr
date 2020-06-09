@@ -44,7 +44,7 @@ updateEnv
          bprefix <- coreLift $ getEnv "IDRIS2_PREFIX"
          the (Core ()) $ case bprefix of
               Just p => setPrefix p
-              Nothing => setPrefix yprefix
+              Nothing => pure ()
          bpath <- coreLift $ getEnv "IDRIS2_PATH"
          the (Core ()) $ case bpath of
               Just path => do traverse_ addExtraDir (map trim (split (==pathSeparator) path))
