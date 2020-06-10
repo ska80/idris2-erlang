@@ -2,8 +2,8 @@ Hello
 Hello
 Done
 Free X
-Freeing 0 Hello
 Free Y
+Freeing 0 Hello
 Freeing 1 Hello
 1/1: Building usealloc (usealloc.idr)
 Main> Main> Bye for now!

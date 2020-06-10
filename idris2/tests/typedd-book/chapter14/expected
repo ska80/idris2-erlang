@@ -1,4 +1,12 @@
 1/4: Building DoorJam (DoorJam.idr)
 2/4: Building ATM (ATM.idr)
 3/4: Building Hangman (Hangman.idr)
-4/4: Building All (All.idr)
+Hangman.idr:73:14--73:22:While processing right hand side of hangman at Hangman.idr:72:1--75:1:
+Can't solve constraint between:
+	S ?letters
+and
+	length (letters "testing")
+at:
+73	             gameLoop
+	             ^^^^^^^^
+
