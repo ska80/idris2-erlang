@@ -37,6 +37,29 @@ findInput [] = Nothing
 findInput (InputFile f :: fs) = Just f
 findInput (_ :: fs) = findInput fs
 
+getEscriptPath : IO (Maybe String)
+getEscriptPath = do
+  Right result <- erlCall "escript" "script_name" []
+    | Left _ => pure Nothing
+  pure $ erlDecodeMay (map (\(MkCharlist str) => str) charlist) result
+
+getFileFromArchive : (archivePath : String) -> (filePath : String) -> IO (Maybe String)
+getFileFromArchive archivePath filePath = do
+  extractResult <- erlUnsafeCall ErlTerm "escript" "extract" [MkCharlist archivePath, the (ErlList _) []]
+  let Right (MkTuple2 _ sections) = erlDecode (tuple2 (exact (MkAtom "ok")) any) extractResult
+    | Left _ => pure Nothing
+  archiveResult <- erlUnsafeCall ErlTerm "proplists" "lookup" [MkAtom "archive", sections]
+  let Right (MkTuple2 _ archive) = erlDecode (tuple2 any any) archiveResult
+    | Left _ => pure Nothing
+  zipOpenResult <- erlUnsafeCall ErlTerm "zip" "zip_open" [archive, the (ErlList _) [MkAtom "memory"]]
+  let Right (MkTuple2 _ zipHandle) = erlDecode (tuple2 (exact (MkAtom "ok")) any) zipOpenResult
+    | Left _ => pure Nothing
+  zipGetResult <- erlUnsafeCall ErlTerm "zip" "zip_get" [MkCharlist filePath, zipHandle]
+  let Right (MkTuple2 _ (MkTuple2 _ contents)) = erlDecode (tuple2 (exact (MkAtom "ok")) (tuple2 charlist string)) zipGetResult
+    | Left _ => pure Nothing
+  erlUnsafeCall ErlTerm "zip" "zip_close" [zipHandle]
+  pure $ Just contents
+
 getPrivDir : IO (Maybe String)
 getPrivDir = do
   result <- erlUnsafeCall ErlTerm "code" "priv_dir" [MkAtom "idris2"]
